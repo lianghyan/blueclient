@@ -1,0 +1,28 @@
+<p>
+  exchangelist works!
+</p>
+<br/>
+   <table class="table table-condensed">
+   <thead>
+	<tr class="">
+	<th scope="col">#</th>
+	<th scope="col">Stock Exchange</th>
+	<th scope="col">description</th>
+	<th scope="col">Address</th>
+	<th scope="col">Remarks</th>
+	<th></th>
+	</tr>
+	</thead>
+   <tbody>
+      <tr>
+		<tr *ngFor="let exchange of exchangeList; index as productId">
+		<td><img src="assets/img/mushroom.png" class="img-circle"></td>
+        <td>{{ exchange.exchName }}</td>
+        <td>{{ exchange.brief }}</td>
+	    <td>{{ exchange.contactAddr }}</td>
+        <td>{{ exchange.remarks }}</td>
+		<td><p><button type="button" class="btn btn-default" routerLink ="exchangeadd?exchCd={{ exchange.exchCd}}">&nbsp;&nbsp;Edit&nbsp;&nbsp;</button></p>
+		 </td>
+		<th>&nbsp;</th>
+      </tr>  
+   </tbody></table>

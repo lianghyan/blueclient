@@ -1,0 +1,29 @@
+<p>
+  companylist works!
+</p>
+   <br/>
+   <table class="table table-condensed">
+   <thead>
+	<tr class="">
+	<th scope="col">#</th>
+	<th scope="col">Company Name</th>
+	<th scope="col">Stock Exchanges</th>
+	<th scope="col">Stock code</th>
+	<th scope="col">brief</th>
+	<th></th>
+	</tr>
+	</thead>
+   <tbody>
+      <tr>
+		<tr *ngFor="let company of companyList; index as productId">
+		<td><img src="assets/img/mushroom.png" class="img-circle"></td>
+        <td>{{ company.companyName }}</td>
+        <td>{{ company.exchName }}</td>
+	    <td>{{ company.stockCd }}</td>
+        <td>{{ company.brief }}</td>
+		<td><p><button type="button" class="btn btn-default" routerLink ="/company/update">&nbsp;&nbsp;Edit&nbsp;&nbsp;</button></p>
+		<a href="#"><img src="img/add.png" class="img-circle" routerLink ="/ipoplan">IPO Plan</a>
+		 </td>
+		<th>&nbsp;</th>
+      </tr>  
+   </tbody></table>

@@ -1,0 +1,43 @@
+<p>
+  exchangeadd works!
+</p>
+<form class="form-horizontal" [formGroup]="companyForm" role="form" (ngSubmit)="onSubmit(companyForm.value)">
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="exchCd">Exchange Code:</label>
+    <div class="col-sm-6">
+     <input class="form-control" id="exchCd"  formControlName="exchCd" type="text" value="Exchange Code...">
+    </div>
+  </div>
+    <div class="form-group">
+    <label class="col-sm-2 control-label" for="exchName">Exchange Name:</label>
+    <div class="col-sm-6">
+     <input class="form-control" id="exchName"  formControlName="exchName" type="text"  value="Exchange Name...">
+    </div>
+  </div>
+  
+        <div class="form-group">
+    <label class="col-sm-2 control-label" for="contactAddr">Address:</label>
+    <div class="col-sm-6">
+     <input class="form-control" id="contactAddr" formControlName="contactAddr"  type="text" value="Address...">
+    </div>
+  </div>
+  
+     <div class="form-group">
+    <label class="col-sm-2 control-label" for="brief">Description:</label>
+    <div class="col-sm-6">
+     <input class="form-control" id="brief" formControlName="brief" type="text" value="Description...">
+    </div>
+  </div>
+  
+
+    <div class="form-group">
+    <label class="col-sm-2 control-label" for="remarks">Remarks:</label>
+    <div class="col-sm-6">
+     <input class="form-control" id="remarks" formControlName="remarks"  type="text"  value="Remarks...">
+    </div>
+  </div>
+
+  
+
+  	<a href="#"><img src="img/add.png" class="img-circle">Add Stock Exchange</a>
+</form>
