@@ -14,8 +14,8 @@ export class BluechartComponent implements OnInit {
   }
   
   onChartInit(ec) {     
-4         this.echartsIntance = ec;
-5  }
+         this.echartsIntance = ec;
+  }
 
   dates=[
 			'2013/01/02','2013/01/03','2013/01/04','2013/01/05',
@@ -85,7 +85,7 @@ export class BluechartComponent implements OnInit {
 		
 		//this.lineOption.xAxis.data.push("2014/01/01"); //work
 		this.lineOption.xAxis.data=this.dates;
-		this.lineOption.series[0].data.push("2222") ;
+		this.lineOption.series[0].data.push(2222) ;
 		//alert(this.lineOption.xAxis.data+"\r\n"+this.lineOption.series[0].data);		
 		//this.echartsIntance.setOption(this.lineOption,true);
 		this.echartsIntance.setOption(this.lineOption);

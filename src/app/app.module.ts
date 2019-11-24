@@ -15,8 +15,10 @@ import { CompanyupdateComponent } from './companyupdate/companyupdate.component'
 import { ExchangelistComponent } from './exchangelist/exchangelist.component';
 import { ExchangeaddComponent } from './exchangeadd/exchangeadd.component';
 import { IpoplanComponent } from './ipoplan/ipoplan.component';
-import { FsdchartComponent } from './fsdchart/fsdchart.component';
-import { BluechartComponent } from './bluechart/bluechart.component';
+import { FsdchartComponent } from './chart/fsdchart/fsdchart.component';
+import { BluechartComponent } from './chart/bluechart/bluechart.component';
+import { SinglestockchartComponent } from './chart/singlestockchart/singlestockchart.component';
+import { SinglesectorchartComponent } from './chart/singlesectorchart/singlesectorchart.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { BluechartComponent } from './bluechart/bluechart.component';
     ExchangeaddComponent,
     IpoplanComponent,
     FsdchartComponent,
-    BluechartComponent
+    BluechartComponent,
+    SinglestockchartComponent,
+    SinglesectorchartComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +52,9 @@ import { BluechartComponent } from './bluechart/bluechart.component';
 	{ path: 'exchangelist', component: ExchangelistComponent },
 	{ path: 'exchangeadd', component: ExchangeaddComponent },
 	{ path: 'fsdchart', component: FsdchartComponent },	
-	{ path: 'bluechart', component: BluechartComponent },	 
+	{ path: 'bluechart', component: BluechartComponent },
+	{ path: 'singlestockchart', component: SinglestockchartComponent },	
+	{ path: 'singlesectorchart', component: SinglesectorchartComponent },	
 	{ path: 'ipoplan', component: IpoplanComponent }
 	])
   ],
