@@ -19,6 +19,7 @@ import { FsdchartComponent } from './chart/fsdchart/fsdchart.component';
 import { BluechartComponent } from './chart/bluechart/bluechart.component';
 import { SinglestockchartComponent } from './chart/singlestockchart/singlestockchart.component';
 import { SinglesectorchartComponent } from './chart/singlesectorchart/singlesectorchart.component';
+import { MulstockchartComponent } from './chart/mulstockchart/mulstockchart.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { SinglesectorchartComponent } from './chart/singlesectorchart/singlesect
     FsdchartComponent,
     BluechartComponent,
     SinglestockchartComponent,
-    SinglesectorchartComponent
+    SinglesectorchartComponent,
+    MulstockchartComponent
   ],
   imports: [
     BrowserModule,
@@ -55,6 +57,7 @@ import { SinglesectorchartComponent } from './chart/singlesectorchart/singlesect
 	{ path: 'bluechart', component: BluechartComponent },
 	{ path: 'singlestockchart', component: SinglestockchartComponent },	
 	{ path: 'singlesectorchart', component: SinglesectorchartComponent },	
+	{ path: 'mulstockchart', component: MulstockchartComponent },	
 	{ path: 'ipoplan', component: IpoplanComponent }
 	])
   ],

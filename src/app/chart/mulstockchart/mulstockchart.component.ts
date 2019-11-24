@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { weekList,monthList,quarterList,yearList } from '../model/stockprice';
+import { weekList,monthList,quarterList,yearList } from '../model/stockpriceList';
 
 @Component({
-  selector: 'app-singlestockchart',
-  templateUrl: './singlestockchart.component.html',
-  styleUrls: ['./singlestockchart.component.css']
+  selector: 'app-mulstockchart',
+  templateUrl: './mulstockchart.component.html',
+  styleUrls: ['./mulstockchart.component.css']
 })
-export class SinglestockchartComponent implements OnInit {
+export class MulstockchartComponent implements OnInit {
 	echartsIntance;
 	priceList;
 	lineOption;
@@ -44,13 +44,13 @@ export class SinglestockchartComponent implements OnInit {
 	
 		xAxis: {
 			type: 'category',
-			data: this.priceList.dates
+			//data: this.priceList.dates
 		},
 		yAxis: {
 			type: 'value'
 		},
 		series: [{
-			data: this.priceList.values,
+			//data: this.priceList[0].values,
 			type: 'line'
 		}]
 	};
@@ -59,8 +59,25 @@ export class SinglestockchartComponent implements OnInit {
 	
 	setWeek(){
 		this.priceList=weekList;
-		this.lineOption.xAxis.data=this.priceList.dates;
-		this.lineOption.series[0].data=this.priceList.values ;
+ 		var legend={data:['500512','500513']};
+		this.lineOption.legend=legend; 		
+		this.lineOption.xAxis.data=this.priceList[0].dates;
+		this.lineOption.yAxis.min=0;
+		this.lineOption.yAxis.max=2000;
+		var series=[{
+			name:this.priceList[0].stockCd;
+			type: 'line';
+			data: this.priceList[0].values;
+		},
+		{
+			name:this.priceList[1].stockCd;
+			type: 'line';
+			data: this.priceList[1].values;
+		}
+		];
+		this.lineOption.series=series;
+ 		//this.lineOption.series.push(series[0]);
+		//this.lineOption.series.push(series[1]);
 		this.echartsIntance.setOption(this.lineOption);
 
 	}
@@ -76,6 +93,7 @@ export class SinglestockchartComponent implements OnInit {
 		
 		this.priceList=quarterList;
 		this.lineOption.xAxis.data=this.priceList.dates;
+		this.lineOption.series[0].name=this.priceList.stockCd ;
 		this.lineOption.series[0].data=this.priceList.values ;
 		this.echartsIntance.setOption(this.lineOption);
 
@@ -87,4 +105,5 @@ export class SinglestockchartComponent implements OnInit {
 		this.lineOption.series[0].data=this.priceList.values ;
 		this.echartsIntance.setOption(this.lineOption);
 	}
+
 }
