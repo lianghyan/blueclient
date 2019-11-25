@@ -20,6 +20,8 @@ import { BluechartComponent } from './chart/bluechart/bluechart.component';
 import { SinglestockchartComponent } from './chart/singlestockchart/singlestockchart.component';
 import { SinglesectorchartComponent } from './chart/singlesectorchart/singlesectorchart.component';
 import { MulstockchartComponent } from './chart/mulstockchart/mulstockchart.component';
+import { MulsectorchartComponent } from './chart/mulsectorchart/mulsectorchart.component';
+import { StocksectorchartComponent } from './chart/stocksectorchart/stocksectorchart.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { MulstockchartComponent } from './chart/mulstockchart/mulstockchart.comp
     BluechartComponent,
     SinglestockchartComponent,
     SinglesectorchartComponent,
-    MulstockchartComponent
+    MulstockchartComponent,
+    MulsectorchartComponent,
+    StocksectorchartComponent
   ],
   imports: [
     BrowserModule,
@@ -58,6 +62,8 @@ import { MulstockchartComponent } from './chart/mulstockchart/mulstockchart.comp
 	{ path: 'singlestockchart', component: SinglestockchartComponent },	
 	{ path: 'singlesectorchart', component: SinglesectorchartComponent },	
 	{ path: 'mulstockchart', component: MulstockchartComponent },	
+	{ path: 'mulsectorchart', component: MulsectorchartComponent },	
+	{ path: 'stocksectorchart', component: StocksectorchartComponent },	
 	{ path: 'ipoplan', component: IpoplanComponent }
 	])
   ],
