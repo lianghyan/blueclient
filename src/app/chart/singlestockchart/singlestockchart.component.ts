@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { weekList,monthList,quarterList,yearList } from '../model/stockprice';
+import { priceData } from '../model/stockprice';
 
 @Component({
   selector: 'app-singlestockchart',
@@ -13,7 +13,7 @@ export class SinglestockchartComponent implements OnInit {
  	constructor() { }
 
 	ngOnInit() {
-		this.priceList=weekList;
+		this.priceList=priceData.weekList;
 		//alert(this.priceList.dates);
 	  	//alert(this.priceList.values);
 		this.initLineOption();
@@ -58,14 +58,14 @@ export class SinglestockchartComponent implements OnInit {
 	}
 	
 	setWeek(){
-		this.priceList=weekList;
+		this.priceList=priceData.weekList;
 		this.lineOption.xAxis.data=this.priceList.dates;
 		this.lineOption.series[0].data=this.priceList.values ;
 		this.echartsIntance.setOption(this.lineOption);
 
 	}
 	 setMonth(){
-		this.priceList=monthList;
+		this.priceList=priceData.monthList;
 		this.lineOption.xAxis.data=this.priceList.dates;
 		this.lineOption.series[0].data=this.priceList.values ;
 		this.echartsIntance.setOption(this.lineOption);
@@ -74,7 +74,7 @@ export class SinglestockchartComponent implements OnInit {
 	
 	setQuarter(){
 		
-		this.priceList=quarterList;
+		this.priceList=priceData.quarterList;
 		this.lineOption.xAxis.data=this.priceList.dates;
 		this.lineOption.series[0].data=this.priceList.values ;
 		this.echartsIntance.setOption(this.lineOption);
@@ -82,7 +82,7 @@ export class SinglestockchartComponent implements OnInit {
 	}
 	
 	setYear(){
-		this.priceList=yearList;
+		this.priceList=priceData.yearList;
 		this.lineOption.xAxis.data=this.priceList.dates;
 		this.lineOption.series[0].data=this.priceList.values ;
 		this.echartsIntance.setOption(this.lineOption);

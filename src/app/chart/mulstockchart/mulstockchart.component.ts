@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { weekList,monthList,quarterList,yearList } from '../model/stockpriceList';
+import {priceData } from '../model/stockpriceList';
 
 @Component({
   selector: 'app-mulstockchart',
@@ -8,14 +8,10 @@ import { weekList,monthList,quarterList,yearList } from '../model/stockpriceList
 })
 export class MulstockchartComponent implements OnInit {
 	echartsIntance;
-	priceList;
 	lineOption;
  	constructor() { }
 
 	ngOnInit() {
-		this.priceList=weekList;
-		//alert(this.priceList.dates);
-	  	//alert(this.priceList.values);
 		this.initLineOption();
 	}
 	onChartInit(ec) {     
@@ -44,66 +40,98 @@ export class MulstockchartComponent implements OnInit {
 	
 		xAxis: {
 			type: 'category',
-			//data: this.priceList.dates
 		},
 		yAxis: {
 			type: 'value'
 		},
 		series: [{
-			//data: this.priceList[0].values,
 			type: 'line'
 		}]
 	};
-		
+		this.setPriceData(priceData.weekList);
 	}
 	
+
 	setWeek(){
-		this.priceList=weekList;
- 		var legend={data:['500512','500513']};
-		this.lineOption.legend=legend; 		
-		this.lineOption.xAxis.data=this.priceList[0].dates;
-		this.lineOption.yAxis.min=0;
-		this.lineOption.yAxis.max=2000;
-		var series=[{
-			name:this.priceList[0].stockCd;
-			type: 'line';
-			data: this.priceList[0].values;
-		},
-		{
-			name:this.priceList[1].stockCd;
-			type: 'line';
-			data: this.priceList[1].values;
-		}
-		];
-		this.lineOption.series=series;
- 		//this.lineOption.series.push(series[0]);
-		//this.lineOption.series.push(series[1]);
+		this.setPriceData(priceData.weekList);				
 		this.echartsIntance.setOption(this.lineOption);
-
-	}
-	 setMonth(){
-		this.priceList=monthList;
-		this.lineOption.xAxis.data=this.priceList.dates;
-		this.lineOption.series[0].data=this.priceList.values ;
+	};
+	
+	setMonth(){
+		this.setPriceData(priceData.monthList);
 		this.echartsIntance.setOption(this.lineOption);
-
 	}
 	
 	setQuarter(){
-		
-		this.priceList=quarterList;
-		this.lineOption.xAxis.data=this.priceList.dates;
-		this.lineOption.series[0].name=this.priceList.stockCd ;
-		this.lineOption.series[0].data=this.priceList.values ;
+ 		this.setPriceData(priceData.quarterList);
 		this.echartsIntance.setOption(this.lineOption);
-
 	}
 	
 	setYear(){
-		this.priceList=yearList;
-		this.lineOption.xAxis.data=this.priceList.dates;
-		this.lineOption.series[0].data=this.priceList.values ;
+ 		this.setPriceData(priceData.yearList);
 		this.echartsIntance.setOption(this.lineOption);
 	}
 
+	setPriceData(priceData){
+		var legData=new Array();
+		var series=new Array();
+		for(var i=0; i<priceData.length; i++){
+			legData[i]=priceData[i].stockCd;
+			series[i]={
+				name: priceData[i].stockCd,
+				type: 'line',
+				data: priceData[i].values
+			};
+		}
+		 
+		this.lineOption.xAxis.dseriesata=priceData[0].dates;
+		this.lineOption.yAxis.min=0;
+		this.lineOption.yAxis.max=2000;
+		this.lineOption.legend={data: legData};
+		this.lineOption.series=series;		
+	}
+	setWeekforTest(){
+		var priceList=priceData.weekList;
+ 		var legend={data:['500112','600116']};
+		this.lineOption.legend=legend; 		
+		this.lineOption.xAxis.data=priceList[0].dates;
+		this.lineOption.yAxis.min=0;
+		this.lineOption.yAxis.max=2000;
+		var series=[{
+			name: priceList[0].stockCd,
+			type: 'line',
+			data: priceList[0].values,
+		},
+		{
+			name:priceList[1].stockCd,
+			type: 'line',
+			data: priceList[1].values,
+		}
+		];
+		this.lineOption.series=series;
+		this.echartsIntance.setOption(this.lineOption);
+	}
+	
+	setWeekforTest2(){
+
+		var priceData=priceData.weekList;
+		var legData=new Array();
+		var series=new Array();
+		for(var i=0; i<priceData.length; i++){
+			legData[i]=priceData[i].stockCd;
+			series[i]={
+				name: priceData[i].stockCd,
+				type: 'line',
+				data: priceData[i].values
+			};
+		}
+		 
+		this.lineOption.xAxis.dseriesata=priceData[0].dates;
+		this.lineOption.yAxis.min=0;
+		this.lineOption.yAxis.max=2000;
+		this.lineOption.legend={data: legData};
+		this.lineOption.series=series;		
+		
+		this.echartsIntance.setOption(this.lineOption);
+	}
 }
