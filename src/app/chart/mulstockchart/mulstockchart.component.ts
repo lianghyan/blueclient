@@ -84,7 +84,7 @@ export class MulstockchartComponent implements OnInit {
 			};
 		}
 		 
-		this.lineOption.xAxis.dseriesata=priceData[0].dates;
+		this.lineOption.xAxis.data=priceData[0].dates;
 		this.lineOption.yAxis.min=0;
 		this.lineOption.yAxis.max=2000;
 		this.lineOption.legend={data: legData};
@@ -126,7 +126,7 @@ export class MulstockchartComponent implements OnInit {
 			};
 		}
 		 
-		this.lineOption.xAxis.dseriesata=priceData[0].dates;
+		this.lineOption.xAxis.data=priceData[0].dates;
 		this.lineOption.yAxis.min=0;
 		this.lineOption.yAxis.max=2000;
 		this.lineOption.legend={data: legData};

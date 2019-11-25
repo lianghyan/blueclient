@@ -13,6 +13,7 @@ export class StocksectorchartComponent implements OnInit {
 
 	ngOnInit() {
 		this.initLineOption();
+		this.setPriceData(priceData.weekList);
 	}
 	onChartInit(ec) {     
          this.echartsIntance = ec;
@@ -95,7 +96,7 @@ export class StocksectorchartComponent implements OnInit {
 
 		}
 		 
-		this.lineOption.xAxis.dseriesata=priceData[0].dates;
+		this.lineOption.xAxis.data=priceData[0].dates;
 		this.lineOption.yAxis.min=0;
 		this.lineOption.yAxis.max=2000;
 		this.lineOption.legend={data: legData};
