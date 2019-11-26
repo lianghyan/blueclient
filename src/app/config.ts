@@ -1,8 +1,8 @@
 export const fsdconfig =  
   {
-    serverurl: 'ttp://127.0.0.1:8769',
+    serverurl: 'http://127.0.0.1:8762',
 	fsdsecurity: '/fsdsecurity',
-	fsduser: '/fsduser',
+	fsduser: '/user',
 	fsdpayment: '/fsdpayment',
 	fsdsearch: '/fsdsearch',
 	fsdskill: '/fsdskill',

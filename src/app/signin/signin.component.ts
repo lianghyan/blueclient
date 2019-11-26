@@ -4,6 +4,7 @@ import { Router} from '@angular/router';
 import { HttpClient, HttpHeaders,HttpParams } from '@angular/common/http';
 
 import { fsdconfig } from '../config';
+import { bfresponse } from './bfresponse';
 
 @Component({
   selector: 'app-signin',
@@ -17,14 +18,12 @@ export class SigninComponent implements OnInit {
 
   ngOnInit() {
 	  this.loginForm = this.formBuilder.group({
-		  loginId: '',
-		  loginPwd: ''
+		  userName: '',
+		  password: ''
         });
   }
  onClickSubmit(data) {
- 	  var username=data.loginId;
- 	  var pass=data.loginPwd;
-	  
+ 	  
 	  const httpOptions = {
 	  headers: new HttpHeaders({
 		'Content-Type':  'application/json;charset=UTF-8',
@@ -32,11 +31,23 @@ export class SigninComponent implements OnInit {
 		'Authorization': 'my-auth-token',
 		'responseType': 'text'
 	  }),
-		params: new HttpParams().append('username', 'usky').append('password', '111111')
+		//params: new HttpParams().append('username', 'usky').append('password', '111111')
 		//params:new HttpParams({"username": "usky", "password": "111111" });
 	};	  
-	
-	alert(fsdconfig.serverurl+fsdconfig.fsdsecurity);
-
+	var url=fsdconfig.serverurl+fsdconfig.fsduser+"/login";
+	this.http.post<any>(url, this.loginForm.value, httpOptions).subscribe(
+         (val) => {
+			 if(val.status==-1){
+				 alert(val.retMsg);
+			 }else{
+				alert(val.token);
+				window.localStorage.setItem('role', val.role);
+				window.localStorage.setItem('token', val.token);
+				window.localStorage.setItem('userName', this.loginForm.value.userName);
+				alert(val.retMsg);
+				this.router.navigateByUrl("companylist");  
+			}
+		}
+	);
  }
 }

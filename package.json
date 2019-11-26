@@ -28,6 +28,7 @@
     "ngx-echarts": "^4.2.2",
     "rxjs": "~6.2.0",
     "save": "^2.4.0",
+    "ts-md5": "^1.2.7",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
