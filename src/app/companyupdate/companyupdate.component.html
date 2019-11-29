@@ -1,61 +1,73 @@
 <p>
   companyupdate works!
 </p>
+ 
 <form class="form-horizontal" [formGroup]="companyForm" role="form" (ngSubmit)="onSubmit(companyForm.value)">
   <div class="form-group">
+   	<div class="col-lg-7">
+   <h3 class="text-center">Company Profile</h3>
+	</div> 
+	</div>
+ <div class="form-group">
     <label class="col-sm-2 control-label" for="companyCd">Company Code:</label>
     <div class="col-sm-6">
-     <input class="form-control" id="companyCd"  formControlName="companyCd" type="text" value="Company Code...">
+     <input class="form-control" id="companyCd"  formControlName="companyCd" readonly type="text" placeholder="Company Code...">
     </div>
   </div>
     <div class="form-group">
     <label class="col-sm-2 control-label" for="companyName">Company Name:</label>
     <div class="col-sm-6">
-     <input class="form-control" id="companyName"  formControlName="companyName" type="text"  value="Company Name...">
+     <input class="form-control" id="companyName"  formControlName="companyName" type="text"  placeholder="Company Name...">
     </div>
   </div>
   
     <div class="form-group">
     <label class="col-sm-2 control-label" for="ceoName">CEO Name:</label>
     <div class="col-sm-6">
-     <input class="form-control" id="ceoName" formControlName="ceoName"  type="text" value="CEO Name...">
+     <input class="form-control" id="ceoName" formControlName="ceoName"  type="text" placeholder="CEO Name...">
     </div>
   </div>
     <div class="form-group">
     <label class="col-sm-2 control-label" for="director">Director:</label>
     <div class="col-sm-6">
-     <input class="form-control" id="director" formControlName="director"  type="text"  value="Director...">
+     <input class="form-control" id="director" formControlName="director"  type="text"  placeholder="Director...">
     </div>
   </div>
   
      <div class="form-group">
     <label class="col-sm-2 control-label" for="brief">Description:</label>
     <div class="col-sm-6">
-     <input class="form-control" id="brief" formControlName="brief" type="text" value="Description...">
+     <input class="form-control" id="brief" formControlName="brief" type="text" placeholder="Description...">
     </div>
   </div>
   
-     <div class="form-group">
+   <div class="form-group">
     <label class="col-sm-2 control-label" for="exchCd">Exchange Code:</label>
     <div class="col-sm-6">
     <select class="custom-select" id="exchCd" formControlName="exchCd">
-                     <option value="se1">BSE</option>
-                    <option value="se2">NSE</option>
-                    <option value="se3">NASDAQ</option>
-                    <option value="se4">NYSE</option>
-      </select>
+                     <option value="BSE">BSE stock exchange</option>
+                    <option value="NSE">National Stock Exchange</option>
+       </select>
 	</div>
 	</div>
-	      <div class="form-group">
+     <div class="form-group">
     <label class="col-sm-2 control-label" for="sectorCd">Sector Code:</label>
     <div class="col-sm-6">
 	<select class="custom-select" id="sectorCd" formControlName="sectorCd">
-                    <option value="sc1">IT</option>
-                    <option value="sc2">Infotainment</option>
-                    <option value="sc3">Finance</option>
-                    <option value="sc4">Real-Estate</option>
+        <option value="0101">agruculture</option>
+        <option value="0102">forest</option>
+        <option value="0337">traffic</option>
+        <option value="0340">computer</option>
+        <option value="1068">bank</option>
+        <option value="1069">security</option>
     </select>
     </div>
    </div>
-  	<a href="#"><img src="img/add.png" class="img-circle">Add Company</a>
-</form>
+   <div class="btn-group col-sm-offset-2 col-sm-7">
+		  <input routerLink ="/companylist" class="btn btn-default" type = "button" value = "Back">
+		  <a routerLink ="/ipoplan" [queryParams]="{companyCd:companyForm.value.companyCd}">IPO Plan</a>
+		  <input routerLink ="/ipoplan" [queryParams]="{companyName: companyForm.value.companyName,companyCd:companyForm.value.companyCd}"class="btn btn-default" type = "button" value = "IPO Plan"> 
+		  <a routerLink ="/singlestockchart" [queryParams]="{companyName: companyForm.value.companyName,companyCd:companyForm.value.companyCd}">View Chart</a><input routerLink ="/singlestockchart" [queryParams]="{companyName: companyForm.value.companyName,companyCd:companyForm.value.companyCd}" class="btn btn-default" type = "button" value = "View Chart"> 
+    </div>
+	 
+ </form>

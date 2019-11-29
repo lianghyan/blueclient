@@ -63,7 +63,7 @@ import { StocksectorchartComponent } from './chart/stocksectorchart/stocksectorc
 	{ path: 'singlesectorchart', component: SinglesectorchartComponent },	
 	{ path: 'mulstockchart', component: MulstockchartComponent },	
 	{ path: 'mulsectorchart', component: MulsectorchartComponent },	
-	{ path: 'stocksectorchart', component: StocksectorchartComponent },	
+	{ path: 'mulsectorchart', component: MulsectorchartComponent },	
 	{ path: 'ipoplan', component: IpoplanComponent }
 	])
   ],

@@ -1,7 +1,23 @@
 <p>
   companylist works!
 </p>
-   <br/>
+   <form class="form-horizontal" [formGroup]="searchForm" role="form" (ngSubmit)="searchCompany(searchForm.value)">   
+  	<div class="form-group">
+     <div class="col-sm-4">
+     <input class="form-control" id="companyName"  formControlName="companyName" type="text" placeholder="Input company name..."/>
+  		  <div id="dataList" class="select-box mui-inline">
+		  <ul id="ulList" type="none" class="custom-option-box">
+		  <li (click)="showLi($event)" *ngFor="let comName of compNameList;">{{comName}}</li>
+		  <li (click)="showLi($event)">zhangsan</li>
+		  <li (click)="showLi($event)">li si<li>
+		  </ul>
+		  </div>
+	</div>
+	<div class="col-sm-13">
+	<button type="submit" class="btn btn-default" >&nbsp;&nbsp;Search&nbsp;&nbsp;</button>		  
+    </div>
+  </div>
+  </form>
    <table class="table table-condensed">
    <thead>
 	<tr class="">
@@ -10,19 +26,18 @@
 	<th scope="col">Stock Exchanges</th>
 	<th scope="col">Stock code</th>
 	<th scope="col">brief</th>
-	<th></th>
+	<th><button type="button" class="btn btn-default" routerLink ="/companyupdate">&nbsp;&nbsp;Add&nbsp;&nbsp;</button></th>
 	</tr>
 	</thead>
    <tbody>
       <tr>
 		<tr *ngFor="let company of companyList; index as productId">
 		<td><img src="assets/img/mushroom.png" class="img-circle"></td>
-        <td><a routerLink ="/companyupdate">{{ company.companyName }}</a></td>
-        <td>{{ company.exchName }}</td>
+        <td><a routerLink ="/companyupdate" [queryParams]="{op:'add',companyCd:company.companyCd, companyName: company.companyName}">{{ company.companyName }}</a></td>
+         <td>{{ company.exchName }}</td>
 	    <td>{{ company.stockCd }}</td>
         <td>{{ company.brief }}</td>
-		<td><p><button type="button" class="btn btn-default" routerLink ="/companyupdate">&nbsp;&nbsp;Edit&nbsp;&nbsp;</button></p>
-		<a routerLink ="/ipoplan"><img src="img/add.png" class="img-circle" >IPO Plan</a>
+		<td><button type="button" class="btn btn-default" routerLink ="/companyupdate" [queryParams]="{op:'update',companyCd:company.companyCd, companyName: company.companyName}">&nbsp;&nbsp;Edit&nbsp;&nbsp;</button>
 		 </td>
 		<th>&nbsp;</th>
       </tr>  

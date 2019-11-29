@@ -1,15 +1,2 @@
-export const company = 
-  {
-	companyCd: 'neu',
-	companyName: 'neusoft company',
-	ceoName: 'Liu Ji Ren',
-	director: 'LiuHong',
-	brief: 'software company',
-	exchCd: 'sz000',
-	exchName: 'shenzhen stock exchange',
-	stockCd: '000321',
-	sectorCd: 'JSJ001',
-	sectorName: 'Computer'
-  };
-
+export const company = {"companyCd":"neu","companyName":"neusoft company","ceoName":"liujiren","brief":"Chinese software company","exchCd":"NSE","exchName":"National Stock Exchange","stockCd":"500112","director":null,"sectorCd":"0340","sectorName":"computer"};
 

@@ -1,47 +1,64 @@
 <p>
   ipoplan works!
 </p>
-<form class="form-horizontal" [formGroup]="companyForm" role="form" (ngSubmit)="onSubmit(companyForm.value)">
-   <div class="form-group">
+<form class="form-horizontal" [formGroup]="ipoForm" role="form" (ngSubmit)="onSubmit(ipoForm.value)">   
+    <div class="form-group">
+   	<div class="col-lg-8">
+   <h3 class="text-center">IPO Plan</h3>
+	</div> 
+	</div>	 
+	<div class="form-group">
     <label class="col-sm-2 control-label" for="companyCd">Company Code:</label>
     <div class="col-sm-6">
-     <input class="form-control" id="exchCd"  formControlName="companyCd" type="text" value="Company Code...">
+     <input class="form-control" id="companyCd"  formControlName="companyCd" readonly type="text" >
     </div>
-  </div>
-    <div class="form-group">
-    <label class="col-sm-2 control-label" for="exchCd">Exchange Code:</label>
+	</div>
+	<div class="form-group">
+    <label class="col-sm-2 control-label" for="companyName">Company Name:</label>
     <div class="col-sm-6">
-     <input class="form-control" id="exchCd"  formControlName="exchCd" type="text"  value="Exchange Code...">
+     <input class="form-control" id="companyName"  formControlName="companyName" type="text" >
     </div>
   </div>
+
+   <div class="form-group">
+    <label class="col-sm-2 control-label" for="exchCd">Exchange Name:</label>
+    <div class="col-sm-6">
+    <select class="custom-select" id="exchCd" formControlName="exchCd">
+		<option value="BSE">BSE stock exchange</option>
+		<option value="NSE">National Stock Exchange</option>
+    </select>
+	</div>
+	</div>
   
          <div class="form-group">
     <label class="col-sm-2 control-label" for="pricePerShare">Price Per Share:</label>
     <div class="col-sm-6">
-     <input class="form-control" id="pricePerShare" formControlName="pricePerShare"  type="text" value="Price...">
+     <input class="form-control" id="pricePerShare" formControlName="pricePerShare"  type="text" placeholder="Price...">
     </div>
   </div>
   
      <div class="form-group">
     <label class="col-sm-2 control-label" for="totalShares">Total Shares:</label>
     <div class="col-sm-6">
-     <input class="form-control" id="totalShares" formControlName="totalShares" type="text" value="totalShares...">
+     <input class="form-control" id="totalShares" formControlName="totalShares" type="text" placeholder="totalShares...">
     </div>
   </div>
      <div class="form-group">
     <label class="col-sm-2 control-label" for="openDate">Open Date:</label>
     <div class="col-sm-6">
-     <input class="form-control" id="openDate" formControlName="openDate"  type="text"  value="Date...">
+     <input class="form-control" id="openDate" formControlName="openDate"  type="text"  placeholder="Date...">
     </div>
   </div>  
   
      <div class="form-group">
     <label class="col-sm-2 control-label" for="remarks">Remarks:</label>
     <div class="col-sm-6">
-     <input class="form-control" id="remarks" formControlName="remarks"  type="text"  value="Remarks...">
+     <input class="form-control" id="remarks" formControlName="remarks"  type="text"  placeholder="Remarks...">
     </div>
   </div>
-  
-   	<a href="#"><img src="img/add.png" class="img-circle">Update</a>
+   <div class="btn-group col-sm-offset-6 col-sm-6">
+   	<input class="btn btn-default" type = "button" (click)="save()" value = "Save">
+ 	<input (click)="goBack()" class="btn btn-default" type = "button" value = "Back">
 
+	</div>
 </form>
