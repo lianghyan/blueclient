@@ -10,7 +10,6 @@ import { HeaderComponent } from './header/header.component';
 import { SignupComponent } from './signup/signup.component';
 import { SigninComponent } from './signin/signin.component';
 import { CompanylistComponent } from './companylist/companylist.component';
-import { CompanyaddComponent } from './companyadd/companyadd.component';
 import { CompanyupdateComponent } from './companyupdate/companyupdate.component';
 import { ExchangelistComponent } from './exchangelist/exchangelist.component';
 import { ExchangeaddComponent } from './exchangeadd/exchangeadd.component';
@@ -30,7 +29,6 @@ import { StocksectorchartComponent } from './chart/stocksectorchart/stocksectorc
     SignupComponent,
     SigninComponent,
     CompanylistComponent,
-	CompanyaddComponent,
     CompanyupdateComponent,
     ExchangelistComponent,
     ExchangeaddComponent,
@@ -53,7 +51,6 @@ import { StocksectorchartComponent } from './chart/stocksectorchart/stocksectorc
 	{ path: 'signin', component: SigninComponent },
 	{ path: 'signup', component: SignupComponent },
 	{ path: 'companylist', component: CompanylistComponent },
-	{ path: 'companyadd', component: CompanyaddComponent },
 	{ path: 'companyupdate', component: CompanyupdateComponent },
 	{ path: 'exchangelist', component: ExchangelistComponent },
 	{ path: 'exchangeadd', component: ExchangeaddComponent },
@@ -63,7 +60,7 @@ import { StocksectorchartComponent } from './chart/stocksectorchart/stocksectorc
 	{ path: 'singlesectorchart', component: SinglesectorchartComponent },	
 	{ path: 'mulstockchart', component: MulstockchartComponent },	
 	{ path: 'mulsectorchart', component: MulsectorchartComponent },	
-	{ path: 'mulsectorchart', component: MulsectorchartComponent },	
+	{ path: 'stocksectorchart', component: StocksectorchartComponent },	
 	{ path: 'ipoplan', component: IpoplanComponent }
 	])
   ],

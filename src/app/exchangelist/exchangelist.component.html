@@ -10,18 +10,18 @@
 	<th scope="col">description</th>
 	<th scope="col">Address</th>
 	<th scope="col">Remarks</th>
-	<th></th>
+	<th><button type="button" class="btn btn-default" routerLink ="/exchangeadd" [queryParams]="{op:'add'}">&nbsp;&nbsp;Add&nbsp;&nbsp;</button></th>
 	</tr>
 	</thead>
    <tbody>
       <tr>
 		<tr *ngFor="let exchange of exchangeList; index as productId">
 		<td><img src="assets/img/mushroom.png" class="img-circle"></td>
-        <td>{{ exchange.exchName }}</td>
+        <td><a routerLink ="/exchangeadd" [queryParams]="{op:'update', exchCd: exchange.exchCd}">{{ exchange.exchName }}</a></td>
         <td>{{ exchange.brief }}</td>
 	    <td>{{ exchange.contactAddr }}</td>
         <td>{{ exchange.remarks }}</td>
-		<td><p><button type="button" class="btn btn-default" routerLink ="exchangeadd?exchCd={{ exchange.exchCd}}">&nbsp;&nbsp;Edit&nbsp;&nbsp;</button></p>
+		<td><p><button type="button" class="btn btn-default" routerLink ="/exchangeadd" [queryParams]="{op:'update', exchCd: exchange.exchCd}">&nbsp;&nbsp;Edit&nbsp;&nbsp;</button></p>
 		 </td>
 		<th>&nbsp;</th>
       </tr>  

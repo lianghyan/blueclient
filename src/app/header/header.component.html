@@ -18,19 +18,29 @@
 		<li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Company <span class="caret"></span></a>
           <ul class="dropdown-menu">            
-            <li><a routerLink="/company/list">Find Company</a></li>
-			<li><a routerLink="/company/add">Add Company</a></li>
-			<li><a routerLink="/company/update">Update Company</a></li>
+            <li><a routerLink="/companylist">Find Company</a></li>
+			<li><a routerLink="/companyupdate" [queryParams]="{op:'add'}">Add Company</a></li>
           </ul>
         </li>        
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Exchange <span class="caret"></span></a>
           <ul class="dropdown-menu">            
-            <li><a routerLink="/exchange/list">Find Exchange</a></li>
-			<li><a routerLink="/company/add">Add Exchange</a></li>
+            <li><a routerLink="/exchangelist">Exchange List</a></li>
+			<li><a routerLink="/exchangeadd" [queryParams]="{op:'add'}">Add Exchange</a></li>
           </ul>
         </li>
-		<li><a routerLink="/ipo/add">Add IPO</a></li>
+		<li><a routerLink="/ipoplan" [queryParams]="{op:'add'}">Add IPO</a></li>
+		
+		<li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Chart <span class="caret"></span></a>
+          <ul class="dropdown-menu">            
+            <li><a routerLink="/singlestockchart">company chart</a></li>
+			<li><a routerLink="/mulstockchart">company comparison chart</a></li>
+			<li><a routerLink="/singlesectorchart">sector chart</a></li>
+			<li><a routerLink="/mulsectorchart">sector comparison chart</a></li>
+			<li><a routerLink="/mulsectorchart">company sector comparison chart</a></li>
+          </ul>
+        </li>
       </ul>
       <form class="navbar-form navbar-left">
         <div class="form-group">

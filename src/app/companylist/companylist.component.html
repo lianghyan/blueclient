@@ -1,15 +1,13 @@
 <p>
   companylist works!
 </p>
-   <form class="form-horizontal" [formGroup]="searchForm" role="form" (ngSubmit)="searchCompany(searchForm.value)">   
+   <form class="form-horizontal" [formGroup]="searchForm" role="form" (ngSubmit)="findCompanyByName(searchForm.value)">   
   	<div class="form-group">
      <div class="col-sm-4">
-     <input class="form-control" id="companyName"  formControlName="companyName" type="text" placeholder="Input company name..."/>
+     <input class="form-control" id="companyName"  formControlName="companyName" (keyup)="filterData()" type="text" placeholder="Input company name..."/>
   		  <div id="dataList" class="select-box mui-inline">
 		  <ul id="ulList" type="none" class="custom-option-box">
 		  <li (click)="showLi($event)" *ngFor="let comName of compNameList;">{{comName}}</li>
-		  <li (click)="showLi($event)">zhangsan</li>
-		  <li (click)="showLi($event)">li si<li>
 		  </ul>
 		  </div>
 	</div>
@@ -26,14 +24,14 @@
 	<th scope="col">Stock Exchanges</th>
 	<th scope="col">Stock code</th>
 	<th scope="col">brief</th>
-	<th><button type="button" class="btn btn-default" routerLink ="/companyupdate">&nbsp;&nbsp;Add&nbsp;&nbsp;</button></th>
+	<th><button type="button" class="btn btn-default" routerLink ="/companyupdate" [queryParams]="{op:'add'}">&nbsp;&nbsp;Add&nbsp;&nbsp;</button></th>
 	</tr>
 	</thead>
    <tbody>
       <tr>
 		<tr *ngFor="let company of companyList; index as productId">
 		<td><img src="assets/img/mushroom.png" class="img-circle"></td>
-        <td><a routerLink ="/companyupdate" [queryParams]="{op:'add',companyCd:company.companyCd, companyName: company.companyName}">{{ company.companyName }}</a></td>
+        <td><a routerLink ="/companyupdate" [queryParams]="{op:'update',companyCd:company.companyCd, companyName: company.companyName}">{{ company.companyName }}</a></td>
          <td>{{ company.exchName }}</td>
 	    <td>{{ company.stockCd }}</td>
         <td>{{ company.brief }}</td>

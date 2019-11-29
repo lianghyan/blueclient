@@ -10,6 +10,7 @@
 	<div class="form-group">
     <label class="col-sm-2 control-label" for="companyCd">Company Code:</label>
     <div class="col-sm-6">
+		<input class="form-control" id="id"  formControlName="id" type="hidden" >
      <input class="form-control" id="companyCd"  formControlName="companyCd" readonly type="text" >
     </div>
 	</div>
@@ -24,9 +25,9 @@
     <label class="col-sm-2 control-label" for="exchCd">Exchange Name:</label>
     <div class="col-sm-6">
     <select class="custom-select" id="exchCd" formControlName="exchCd">
-		<option value="BSE">BSE stock exchange</option>
-		<option value="NSE">National Stock Exchange</option>
-    </select>
+                     <option value="BSE">BSE stock exchange</option>
+                    <option value="NSE">National Stock Exchange</option>
+       </select>
 	</div>
 	</div>
   
@@ -57,7 +58,7 @@
     </div>
   </div>
    <div class="btn-group col-sm-offset-6 col-sm-6">
-   	<input class="btn btn-default" type = "button" (click)="save()" value = "Save">
+   	<input class="btn btn-default" type = "submit" value = "Save">
  	<input (click)="goBack()" class="btn btn-default" type = "button" value = "Back">
 
 	</div>

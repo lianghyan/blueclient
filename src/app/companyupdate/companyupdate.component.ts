@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder,FormGroup } from '@angular/forms';
 import { Router,ActivatedRoute} from '@angular/router'; 
 import { HttpClient, HttpHeaders,HttpParams } from '@angular/common/http';
 
+import { fsdconfig } from '../config';
 import { company } from '../model/company';
 
 @Component({
@@ -24,9 +25,7 @@ export class CompanyupdateComponent implements OnInit {
 	
 	//alert("companyCd: "+ this.activatedRoute.queryParams["companyCd"]);
 	
-	
-	
-	this.activatedRoute.queryParams.subscribe((param:Params )=> {
+	this.activatedRoute.queryParams.subscribe((param:any )=> {
 		//alert(param["companyCd"]+"-"+param["companyName"]);
 		//alert(JSON.stringify(param));
 		pCompanyCd = param.companyCd;
@@ -36,8 +35,11 @@ export class CompanyupdateComponent implements OnInit {
 	   
  	});
   
+	if(pOp=='add'){
+		this.buildForm();
+	}
 	if(pOp=='update'){
-		this.initForm(pCompanyCd);
+		this.findCompanyByCd(pCompanyCd);
 	}
 	 
 	 var role=window.localStorage.getItem('role');
@@ -45,7 +47,7 @@ export class CompanyupdateComponent implements OnInit {
  		role='user';
 	  }
 	  if(role=='user'){
-		  this.setReadOnly();	 		  
+		  //this.setReadOnly();	 		  
 	  }
 	  
 	  //this.getOptions();
@@ -60,7 +62,7 @@ export class CompanyupdateComponent implements OnInit {
 		document.getElementById("sectorCd").setAttribute("disabled","true");
 
 	}
-	buildForm(){
+	buildForm(){		 
 		this.companyForm = this.formBuilder.group({
 		companyCd: '',
 		companyName: '',
@@ -75,18 +77,44 @@ export class CompanyupdateComponent implements OnInit {
     });
 	}
 	
-	initForm(compCd){
-		this.companyForm.value.companyCd=compCd;
-		this.companyForm.value.companyName='neusoft company';
-		this.companyForm.value.ceoName= 'Liu Ji Ren';
-		this.companyForm.value.director= 'LiuHong';
-		this.companyForm.value.brief='software company';
-		this.companyForm.value.exchCd='NSE';
-		this.companyForm.value.exchName='NSE';
-		this.companyForm.value.stockCd= '000321';
-		this.companyForm.value.sectorCd= '0340';
-		this.companyForm.value.sectorName='Computer';
-  
+	 findCompanyByCd(data){
+ 	   
+	   const httpOptions = {
+		  headers: new HttpHeaders({
+			'Content-Type':  'application/json;charset=UTF-8',
+ 			'Authorization': 'my-auth-token',
+			'responseType': 'application/json;charset=UTF-8'
+		  }),
+			params: new HttpParams().append('companyCd', data)
+		};	  
+	   	var url=fsdconfig.fsdcompany+"/companybycd";
+		this.http.post<any>(url, "", httpOptions).subscribe(
+         (val) => {
+			 if(val.status==-1){
+				 alert(val.retMsg);
+			 }else{
+				// alert(val.dataList);
+				this.company=val.data;
+				this.initForm();
+ 			}
+		}
+	);
+
+   }
+   
+   	initForm( ){ 		
+		this.companyForm = this.formBuilder.group({
+		companyCd:this.company.companyCd,
+		companyName: this.company.companyName,
+		ceoName:  this.company.ceoName,
+		director: this.company.director,
+		brief: this.company.brief,
+		exchCd: this.company.exchCd,
+		exchName: this.company.exchName,
+		stockCd: this.company.stockCd,
+		sectorCd: this.company.sectorCd,
+		sectorName: this.company.sectorName 
+		});		
 	}
 	
    getOptions()

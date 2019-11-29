@@ -1,8 +1,14 @@
 <p>
   exchangeadd works!
 </p>
-<form class="form-horizontal" [formGroup]="companyForm" role="form" (ngSubmit)="onSubmit(companyForm.value)">
-  <div class="form-group">
+<form class="form-horizontal" [formGroup]="exchForm" role="form" (ngSubmit)="onSubmit(exchForm.value)">
+   <div class="form-group">
+   	<div class="col-lg-7">
+   <h3 class="text-center">Stock Exchange Profile</h3>
+	</div> 
+	</div>
+
+	<div class="form-group">
     <label class="col-sm-2 control-label" for="exchCd">Exchange Code:</label>
     <div class="col-sm-6">
      <input class="form-control" id="exchCd"  formControlName="exchCd" type="text" value="Exchange Code...">
@@ -36,8 +42,8 @@
      <input class="form-control" id="remarks" formControlName="remarks"  type="text"  value="Remarks...">
     </div>
   </div>
-
-  
-
-  	<a href="#"><img src="img/add.png" class="img-circle">Add Stock Exchange</a>
+   <div class="btn-group col-sm-offset-6 col-sm-6">
+   	<input class="btn btn-default" type = "submit" value = "Save">
+ 	<input (click)="goBack()" class="btn btn-default" type = "button" value = "Back">
+	</div>
 </form>
