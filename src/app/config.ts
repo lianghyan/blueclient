@@ -5,7 +5,7 @@ export const fsdconfig =
 	fsduser: '/user',
 	fsdcompany: 'http://127.0.0.1:8763/company',
 	fsdipo: 'http://127.0.0.1:8763/ipo',
+	chart: 'http://127.0.0.1:8763/stock'
 	fsdexch: 'http://127.0.0.1:8764/exchange',
-	fsdskill: '/fsdskill',
-	fsdtraining: '/fsdtraining'
+	fsdsector: 'http://127.0.0.1:8764/sector',
   };

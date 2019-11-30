@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder,FormGroup } from '@angular/forms';
+import { Router,ActivatedRoute} from '@angular/router'; 
+import { HttpClient, HttpHeaders,HttpParams } from '@angular/common/http';
+
+import { fsdconfig } from '../../config';
 import {priceData } from '../model/stocksectorprice';
 
 @Component({
@@ -9,16 +14,81 @@ import {priceData } from '../model/stocksectorprice';
 export class StocksectorchartComponent implements OnInit {
 	echartsIntance;
 	lineOption;
- 	constructor() { }
+	stockData;
+	lineOption;
+	searchForm;
+	compNameList;
+  constructor(private http: HttpClient, private router: Router,   
+			private activatedRoute: ActivatedRoute, private formBuilder:FormBuilder) {
+		this.searchForm= this.formBuilder.group({
+			stockCd:'IBM',
+			fromDate: '2019-05-12',
+			toDate: '2019-07-12'
+
+		});
+   }
 
 	ngOnInit() {
-		this.initLineOption();
-		this.setPriceData(priceData.weekList);
+		this.findCompanyNames()		
 	}
 	onChartInit(ec) {     
          this.echartsIntance = ec;
 	}
 	
+	findStockPrice(data){
+		var stockCd= data.stockCd;
+			 	  const httpOptions = {
+		  headers: new HttpHeaders({
+			'Content-Type':  'application/json;charset=UTF-8',
+ 			'Authorization': 'my-auth-token',
+			'responseType': 'application/json;charset=UTF-8'
+		  }),
+			params: new HttpParams().append('stockCd', stockCd)
+			                      .append('fromDate', data.fromDate)
+			                      .append('toDate', data.toDate)
+			
+		};
+		alert(stockCd);
+	   	var url=fsdconfig.chart+"/stocksectorprice";
+		this.http.post<any>(url, "", httpOptions).subscribe(
+         (val) => {
+			 if(val.status==-1){
+				 alert(val.retMsg);
+			 }else{				  
+					this.stockData=val.data;
+					this.priceList=this.stockData.weekList;
+					this.initLineOption();
+ 					//alert("return data: "+  this.stockData.weekList);				     
+ 			}
+		}
+	);
+	}
+	
+	findCompanyNames(){
+	 	  const httpOptions = {
+		  headers: new HttpHeaders({
+			'Content-Type':  'application/json;charset=UTF-8',
+ 			'Authorization': 'my-auth-token',
+			'responseType': 'application/json;charset=UTF-8'
+		  }),
+			//params: new HttpParams().append('searchStr', data)
+		};	  
+	   	var url=fsdconfig.fsdcompany+"/listcompanyname";
+		this.http.post<any>(url, "", httpOptions).subscribe(
+         (val) => {
+			 if(val.status==-1){
+				 alert(val.retMsg);
+			 }else{
+				
+				 if(val.dataList.length>0){
+					 this.compNameList=val.dataList;
+					//alert("return dataList: "+val.dataList);					 
+			    }
+ 			}
+		}
+	);
+   } 
+   
 	initLineOption(){
 		this.lineOption = {
 		tooltip: {
@@ -49,27 +119,27 @@ export class StocksectorchartComponent implements OnInit {
 			type: 'line'
 		}]
 	};
-		this.setPriceData(priceData.weekList);
+		this.setPriceData(this.stockData.weekList);
 	}
 	
 
 	setWeek(){
-		this.setPriceData(priceData.weekList);				
+		this.setPriceData(this.stockData.weekList);				
 		this.echartsIntance.setOption(this.lineOption);
 	};
 	
 	setMonth(){
-		this.setPriceData(priceData.monthList);
+		this.setPriceData(this.stockData.monthList);
 		this.echartsIntance.setOption(this.lineOption);
 	}
 	
 	setQuarter(){
- 		this.setPriceData(priceData.quarterList);
+ 		this.setPriceData(this.stockData.quarterList);
 		this.echartsIntance.setOption(this.lineOption);
 	}
 	
 	setYear(){
- 		this.setPriceData(priceData.yearList);
+ 		this.setPriceData(this.stockData.yearList);
 		this.echartsIntance.setOption(this.lineOption);
 	}
 	

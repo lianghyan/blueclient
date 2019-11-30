@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder,FormGroup } from '@angular/forms';
+import { Router,ActivatedRoute} from '@angular/router'; 
+import { HttpClient, HttpHeaders,HttpParams } from '@angular/common/http';
 
+import { fsdconfig } from '../../config';
 import {priceData } from '../model/sectorpriceList';
+
 @Component({
   selector: 'app-mulsectorchart',
   templateUrl: './mulsectorchart.component.html',
@@ -9,14 +14,82 @@ import {priceData } from '../model/sectorpriceList';
 export class MulsectorchartComponent implements OnInit {
 	echartsIntance;
 	lineOption;
- 	constructor() { }
-
+	stockData;
+	searchForm;
+	sectorNameList;
+  constructor(private http: HttpClient, private router: Router,   
+			private activatedRoute: ActivatedRoute, private formBuilder:FormBuilder) {
+		this.searchForm= this.formBuilder.group({
+			sectorCd1: '500112',
+			sectorCd2: '900119',
+			fromDate: '2019-05-12',
+			toDate: '2019-07-12'
+			
+		});
+		
+			 }
 	ngOnInit() {
-		this.initLineOption();
+ 		//this.initLineOption();
+		this.findSectorNames();
+
 	}
+
 	onChartInit(ec) {     
          this.echartsIntance = ec;
 	}
+	
+	findStockPrice(data){
+		 //alert(data.stockCds);
+			 	  const httpOptions = {
+		  headers: new HttpHeaders({
+			'Content-Type':  'application/json;charset=UTF-8',
+ 			'Authorization': 'my-auth-token',
+			'responseType': 'application/json;charset=UTF-8'
+		  }),
+			params: new HttpParams().append('sectorCds', data.sectorCd1)
+			                      .append('sectorCds', data.sectorCd2)
+			                      .append('fromDate', data.fromDate)
+			                      .append('toDate', data.toDate)
+		};	  
+	   	var url=fsdconfig.chart+"/listsectorprice";
+		this.http.post<any>(url, "", httpOptions).subscribe(
+         (val) => {
+			 if(val.status==-1){
+				 alert(val.retMsg);
+			 }else{				  
+					this.stockData=val.data;
+					 this.initLineOption();
+
+					//alert("return data: "+  this.stockData.weekList[0].dates);				     
+ 			}
+		}
+	);
+	}
+	
+	findSectorNames(){
+	 	  const httpOptions = {
+		  headers: new HttpHeaders({
+			'Content-Type':  'application/json;charset=UTF-8',
+ 			'Authorization': 'my-auth-token',
+			'responseType': 'application/json;charset=UTF-8'
+		  }),
+			//params: new HttpParams().append('searchStr', data)
+		};	  
+	   	var url=fsdconfig.fsdsector+"/listSectorNames";
+		this.http.post<any>(url, "", httpOptions).subscribe(
+         (val) => {
+			 if(val.status==-1){
+				 alert(val.retMsg);
+			 }else{
+				
+				 if(val.dataList.length>0){
+					 this.sectorNameList=val.dataList;
+					//alert("return dataList: "+val.dataList);					 
+			    }
+ 			}
+		}
+	);
+   }
 	
 	initLineOption(){
 		this.lineOption = {
@@ -48,90 +121,46 @@ export class MulsectorchartComponent implements OnInit {
 			type: 'line'
 		}]
 	};
-		this.setPriceData(priceData.weekList);
+		this.setstockData(this.stockData.weekList);
 	}
 	
 
 	setWeek(){
-		this.setPriceData(priceData.weekList);				
+		this.setstockData(this.stockData.weekList);				
 		this.echartsIntance.setOption(this.lineOption);
 	};
 	
 	setMonth(){
-		this.setPriceData(priceData.monthList);
+		this.setstockData(this.stockData.monthList);
 		this.echartsIntance.setOption(this.lineOption);
 	}
 	
 	setQuarter(){
- 		this.setPriceData(priceData.quarterList);
+ 		this.setstockData(this.stockData.quarterList);
 		this.echartsIntance.setOption(this.lineOption);
 	}
 	
 	setYear(){
- 		this.setPriceData(priceData.yearList);
+ 		this.setstockData(this.stockData.yearList);
 		this.echartsIntance.setOption(this.lineOption);
 	}
 
-	setPriceData(priceData){
+	setstockData(stockData){
 		var legData=new Array();
 		var series=new Array();
-		for(var i=0; i<priceData.length; i++){
-			legData[i]=priceData[i].sectorCd;
+		for(var i=0; i<stockData.length; i++){
+			legData[i]=stockData[i].sectorCd;
 			series[i]={
-				name: priceData[i].sectorCd,
+				name: stockData[i].sectorCd,
 				type: 'line',
-				data: priceData[i].values
+				data: stockData[i].values
 			};
 		}
 		 
-		this.lineOption.xAxis.dseriesata=priceData[0].dates;
+		this.lineOption.xAxis.dseriesata=stockData[0].dates;
 		this.lineOption.yAxis.min=0;
 		this.lineOption.yAxis.max=2000;
 		this.lineOption.legend={data: legData};
 		this.lineOption.series=series;		
-	}
-	setWeekforTest(){
-		var priceList=priceData.weekList;
- 		var legend={data:['500112','600116']};
-		this.lineOption.legend=legend; 		
-		this.lineOption.xAxis.data=priceList[0].dates;
-		this.lineOption.yAxis.min=0;
-		this.lineOption.yAxis.max=2000;
-		var series=[{
-			name: priceList[0].sectorCd,
-			type: 'line',
-			data: priceList[0].values,
-		},
-		{
-			name:priceList[1].sectorCd,
-			type: 'line',
-			data: priceList[1].values,
-		}
-		];
-		this.lineOption.series=series;
-		this.echartsIntance.setOption(this.lineOption);
-	}
-	
-	setWeekforTest2(){
-
-		var priceData=priceData.weekList;
-		var legData=new Array();
-		var series=new Array();
-		for(var i=0; i<priceData.length; i++){
-			legData[i]=priceData[i].sectorCd;
-			series[i]={
-				name: priceData[i].sectorCd,
-				type: 'line',
-				data: priceData[i].values
-			};
-		}
-		 
-		this.lineOption.xAxis.dseriesata=priceData[0].dates;
-		this.lineOption.yAxis.min=0;
-		this.lineOption.yAxis.max=2000;
-		this.lineOption.legend={data: legData};
-		this.lineOption.series=series;		
-		
-		this.echartsIntance.setOption(this.lineOption);
-	}
+	} 
 }

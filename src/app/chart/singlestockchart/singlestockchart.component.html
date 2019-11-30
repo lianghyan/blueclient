@@ -1,6 +1,17 @@
 <p>
   singlestockchart works!
 </p>
+  <form class="form-horizontal" [formGroup]="searchForm" role="form" (ngSubmit)="findStockPrice(searchForm.value)">   
+  	<div class="form-group">
+     <div class="col-sm-6">
+	 	<select class="custom-select" id="stockCd" formControlName="stockCd" style="width:400px;line-height:40px;height:30px">
+			<option *ngFor="let company of compNameList; index as productId" value="{{company[0]}}">{{company[0]}}-{{company[1]}}</option>
+		</select> &nbsp;&nbsp;
+	<button type="submit" class="btn btn-default" >&nbsp;&nbsp;Show Chart&nbsp;&nbsp;</button>		  
+    </div>
+  </div>
+  </form>
+  
 <div echarts [options]="lineOption"  (chartInit)="onChartInit($event)" class="demo-chart"></div>
 <div class="btn-group btn-group-justified" role="group" aria-label="...">
   <div class="btn-group" role="group">

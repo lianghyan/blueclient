@@ -99,7 +99,7 @@ export class CompanylistComponent implements OnInit {
 		  }),
 			params: new HttpParams().append('searchStr', data)
 		};	  
-	   	var url=fsdconfig.fsdcompany+"/listcompanyname";
+	   	var url=fsdconfig.fsdcompany+"/searchcompanyname";
 		this.http.post<any>(url, "", httpOptions).subscribe(
          (val) => {
 			 if(val.status==-1){

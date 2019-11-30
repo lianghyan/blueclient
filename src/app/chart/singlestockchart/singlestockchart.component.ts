@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder,FormGroup } from '@angular/forms';
+import { Router,ActivatedRoute} from '@angular/router'; 
+import { HttpClient, HttpHeaders,HttpParams } from '@angular/common/http';
+
+import { fsdconfig } from '../../config';
 import { priceData } from '../model/stockprice';
 
 @Component({
@@ -10,14 +15,74 @@ export class SinglestockchartComponent implements OnInit {
 	echartsIntance;
 	priceList;
 	lineOption;
- 	constructor() { }
-
+	priceData=priceData;
+	searchForm;
+	compNameList;
+  constructor(private http: HttpClient, private router: Router,   
+			private activatedRoute: ActivatedRoute, private formBuilder:FormBuilder) {
+		this.searchForm= this.formBuilder.group({
+			stockCd:'IBM'
+		});
+		
+			 }
 	ngOnInit() {
-		this.priceList=priceData.weekList;
+		this.priceList=this.priceData.weekList;
 		//alert(this.priceList.dates);
 	  	//alert(this.priceList.values);
 		this.initLineOption();
+		this.findCompanyNames();
 	}
+	
+		
+	findStockPrice(data){
+		var stockCd= data.stockCd;
+			 	  const httpOptions = {
+		  headers: new HttpHeaders({
+			'Content-Type':  'application/json;charset=UTF-8',
+ 			'Authorization': 'my-auth-token',
+			'responseType': 'application/json;charset=UTF-8'
+		  }),
+			params: new HttpParams().append('stockCd', stockCd)
+		};	  
+	   	var url=fsdconfig.chart+"/pricedetail";
+		this.http.post<any>(url, "", httpOptions).subscribe(
+         (val) => {
+			 if(val.status==-1){
+				 alert(val.retMsg);
+			 }else{				  
+					this.priceData=val.data;
+					this.setWeek();
+					//alert("return data: "+  this.priceData.weekList);				     
+ 			}
+		}
+	);
+	}
+	
+	findCompanyNames(){
+	 	  const httpOptions = {
+		  headers: new HttpHeaders({
+			'Content-Type':  'application/json;charset=UTF-8',
+ 			'Authorization': 'my-auth-token',
+			'responseType': 'application/json;charset=UTF-8'
+		  }),
+			//params: new HttpParams().append('searchStr', data)
+		};	  
+	   	var url=fsdconfig.fsdcompany+"/listcompanyname";
+		this.http.post<any>(url, "", httpOptions).subscribe(
+         (val) => {
+			 if(val.status==-1){
+				 alert(val.retMsg);
+			 }else{
+				
+				 if(val.dataList.length>0){
+					 this.compNameList=val.dataList;
+					//alert("return dataList: "+val.dataList);					 
+			    }
+ 			}
+		}
+	);
+   }
+	   
 	onChartInit(ec) {     
          this.echartsIntance = ec;
 	}
@@ -41,7 +106,9 @@ export class SinglestockchartComponent implements OnInit {
 				saveAsImage: {show: true}
 			}
 		},
-	
+		legend: {
+			data:['500512']
+		},
 		xAxis: {
 			type: 'category',
 			data: this.priceList.dates
@@ -56,25 +123,28 @@ export class SinglestockchartComponent implements OnInit {
 	};
 		
 	}
-	
+
 	setWeek(){
-		this.priceList=priceData.weekList;
+		this.priceList=this.priceData.weekList;
 		this.lineOption.xAxis.data=this.priceList.dates;
 		this.lineOption.series[0].data=this.priceList.values ;
+		this.lineOption.legend={data: [this.searchForm.value.stockCd]};
+		//alert(this.lineOption.legend.data);
 		this.echartsIntance.setOption(this.lineOption);
 
 	}
 	 setMonth(){
-		this.priceList=priceData.monthList;
+		this.priceList=this.priceData.monthList;
 		this.lineOption.xAxis.data=this.priceList.dates;
 		this.lineOption.series[0].data=this.priceList.values ;
+		this.lineOption.legend={data: [this.searchForm.value.stockCd]};
 		this.echartsIntance.setOption(this.lineOption);
 
 	}
 	
 	setQuarter(){
 		
-		this.priceList=priceData.quarterList;
+		this.priceList=this.priceData.quarterList;
 		this.lineOption.xAxis.data=this.priceList.dates;
 		this.lineOption.series[0].data=this.priceList.values ;
 		this.echartsIntance.setOption(this.lineOption);
@@ -82,7 +152,7 @@ export class SinglestockchartComponent implements OnInit {
 	}
 	
 	setYear(){
-		this.priceList=priceData.yearList;
+		this.priceList=this.priceData.yearList;
 		this.lineOption.xAxis.data=this.priceList.dates;
 		this.lineOption.series[0].data=this.priceList.values ;
 		this.echartsIntance.setOption(this.lineOption);
