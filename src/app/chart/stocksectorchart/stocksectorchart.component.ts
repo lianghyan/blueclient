@@ -13,7 +13,6 @@ import {priceData } from '../model/stocksectorprice';
 })
 export class StocksectorchartComponent implements OnInit {
 	echartsIntance;
-	lineOption;
 	stockData;
 	lineOption;
 	searchForm;
@@ -56,7 +55,7 @@ export class StocksectorchartComponent implements OnInit {
 				 alert(val.retMsg);
 			 }else{				  
 					this.stockData=val.data;
-					this.priceList=this.stockData.weekList;
+					//this.priceList=this.stockData.weekList;
 					this.initLineOption();
  					//alert("return data: "+  this.stockData.weekList);				     
  			}

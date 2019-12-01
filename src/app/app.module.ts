@@ -21,6 +21,7 @@ import { SinglesectorchartComponent } from './chart/singlesectorchart/singlesect
 import { MulstockchartComponent } from './chart/mulstockchart/mulstockchart.component';
 import { MulsectorchartComponent } from './chart/mulsectorchart/mulsectorchart.component';
 import { StocksectorchartComponent } from './chart/stocksectorchart/stocksectorchart.component';
+import { UploadComponent } from './upload/upload.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { StocksectorchartComponent } from './chart/stocksectorchart/stocksectorc
     SinglesectorchartComponent,
     MulstockchartComponent,
     MulsectorchartComponent,
-    StocksectorchartComponent
+    StocksectorchartComponent,
+    UploadComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +63,7 @@ import { StocksectorchartComponent } from './chart/stocksectorchart/stocksectorc
 	{ path: 'mulstockchart', component: MulstockchartComponent },	
 	{ path: 'mulsectorchart', component: MulsectorchartComponent },	
 	{ path: 'stocksectorchart', component: StocksectorchartComponent },	
+	{ path: 'upload', component: UploadComponent },	
 	{ path: 'ipoplan', component: IpoplanComponent }
 	])
   ],

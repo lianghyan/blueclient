@@ -17,11 +17,12 @@ export class MulstockchartComponent implements OnInit {
 	stockData;
 	searchForm;
 	compNameList;
+	downloadURL=fsdconfig.fsdfile;
   constructor(private http: HttpClient, private router: Router,   
 			private activatedRoute: ActivatedRoute, private formBuilder:FormBuilder) {
 		this.searchForm= this.formBuilder.group({
 			stockCd1: '500112',
-			stockCd2: '900119',
+			stockCd2: '600116',
 			fromDate: '2019-05-12',
 			toDate: '2019-07-12'
 			

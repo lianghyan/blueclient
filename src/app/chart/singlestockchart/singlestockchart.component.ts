@@ -18,10 +18,11 @@ export class SinglestockchartComponent implements OnInit {
 	priceData=priceData;
 	searchForm;
 	compNameList;
+	downloadURL=fsdconfig.fsdfile;
   constructor(private http: HttpClient, private router: Router,   
 			private activatedRoute: ActivatedRoute, private formBuilder:FormBuilder) {
 		this.searchForm= this.formBuilder.group({
-			stockCd:'IBM'
+			stockCd:'500112'
 		});
 		
 			 }
@@ -156,5 +157,9 @@ export class SinglestockchartComponent implements OnInit {
 		this.lineOption.xAxis.data=this.priceList.dates;
 		this.lineOption.series[0].data=this.priceList.values ;
 		this.echartsIntance.setOption(this.lineOption);
+	}
+	
+	exportTable(){
+		alert("export data");
 	}
 }

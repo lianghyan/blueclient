@@ -1,0 +1,20 @@
+<p>
+  upload works!
+</p>
+    <form class="form-horizontal"  [formGroup]="uploadForm" (ngSubmit) = "onClickSubmit(uploadForm.value)" enctype="multipart/form-data">
+  <div class="form-group">
+   	<div class="col-lg-7">
+   <h2 class="red-text text-center">Upload Stock Price</h2>
+	</div> 
+	</div>
+	<br/>
+ 
+   <div class="form-group">
+	<div class="col-sm-6" >
+	<label for="upload">Choose File</label>
+    <input type="file"   class="form-control" id="upload" formControlName="upload" (change)="handleFile($event.target.files)"  multiple="multiple"/>
+	<button type="submit" class="btn btn-default" >&nbsp;&nbsp;Upload&nbsp;&nbsp;</button>
+  </div>
+   </div>
+    </form>
+ 

@@ -7,7 +7,9 @@
 	 	<select class="custom-select" id="stockCd" formControlName="stockCd" style="width:400px;line-height:40px;height:30px">
 			<option *ngFor="let company of compNameList; index as productId" value="{{company[0]}}">{{company[0]}}-{{company[1]}}</option>
 		</select> &nbsp;&nbsp;
-	<button type="submit" class="btn btn-default" >&nbsp;&nbsp;Show Chart&nbsp;&nbsp;</button>		  
+	<button type="submit" class="btn btn-default" >&nbsp;&nbsp;Show Chart&nbsp;&nbsp;</button>
+	<a href="{{downloadURL}}/download?stockCd={{searchForm.value.stockCd}}"><button type="button" class="btn btn-default" >Export Stock Data</button></a>
+	
     </div>
   </div>
   </form>
