@@ -17,10 +17,11 @@ export class StocksectorchartComponent implements OnInit {
 	lineOption;
 	searchForm;
 	compNameList;
+	downloadURL=fsdconfig.fsdfile;
   constructor(private http: HttpClient, private router: Router,   
 			private activatedRoute: ActivatedRoute, private formBuilder:FormBuilder) {
 		this.searchForm= this.formBuilder.group({
-			stockCd:'IBM',
+			stockCd:'500112',
 			fromDate: '2019-05-12',
 			toDate: '2019-07-12'
 

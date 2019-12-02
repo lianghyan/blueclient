@@ -18,10 +18,11 @@ export class SinglesectorchartComponent implements OnInit {
 	lineOption;
 	searchForm;
 	sectorNameList;
+	downloadURL=fsdconfig.fsdfile;
   constructor(private http: HttpClient, private router: Router,   
 			private activatedRoute: ActivatedRoute, private formBuilder:FormBuilder) {
 		this.searchForm= this.formBuilder.group({
-			sectorCd:'IBM'
+			sectorCd:'0340'
 		});
    }
 

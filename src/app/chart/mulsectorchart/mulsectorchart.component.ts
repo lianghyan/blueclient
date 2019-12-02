@@ -17,11 +17,12 @@ export class MulsectorchartComponent implements OnInit {
 	stockData;
 	searchForm;
 	sectorNameList;
+	downloadURL=fsdconfig.fsdfile;
   constructor(private http: HttpClient, private router: Router,   
 			private activatedRoute: ActivatedRoute, private formBuilder:FormBuilder) {
 		this.searchForm= this.formBuilder.group({
-			sectorCd1: '500112',
-			sectorCd2: '900119',
+			sectorCd1: '0340',
+			sectorCd2: '0619',
 			fromDate: '2019-05-12',
 			toDate: '2019-07-12'
 			

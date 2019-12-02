@@ -7,7 +7,8 @@
 	 	<select class="custom-select" id="sectorCd" formControlName="sectorCd" style="width:400px;line-height:40px;height:30px">
 			<option *ngFor="let sector of sectorNameList; index as productId" value="{{sector[0]}}">{{sector[0]}}-{{sector[1]}}</option>
 		</select> &nbsp;&nbsp;
-	<button type="submit" class="btn btn-default" >&nbsp;&nbsp;Show Chart&nbsp;&nbsp;</button>		  
+	<button type="submit" class="btn btn-default" >&nbsp;&nbsp;Show Chart&nbsp;&nbsp;</button>
+	<a href="{{downloadURL}}/sector?sectorCd={{searchForm.value.sectorCd}}"><button type="button" class="btn btn-default" >Export Stock Data</button></a>	
     </div>
   </div>
  </form>
