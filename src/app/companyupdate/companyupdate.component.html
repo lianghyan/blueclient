@@ -11,7 +11,7 @@
  <div class="form-group">
     <label class="col-sm-2 control-label" for="companyCd">Company Code:</label>
     <div class="col-sm-6">
-     <input class="form-control" id="companyCd"  formControlName="companyCd" readonly type="text" placeholder="Company Code...">
+     <input class="form-control" id="companyCd"  formControlName="companyCd"  type="text" placeholder="Company Code...">
     </div>
   </div>
     <div class="form-group">
@@ -64,9 +64,10 @@
     </div>
    </div>
    <div class="btn-group col-sm-offset-2 col-sm-7">
+		<input  class="btn btn-default" type = "submit" value = "Save">
 		  <input routerLink ="/companylist" class="btn btn-default" type = "button" value = "Back">
-		  <a routerLink ="/ipoplan" [queryParams]="{companyCd:companyForm.value.companyCd, companyName: companyForm.value.companyName}">IPO Plan</a>
-		  <input routerLink ="/ipoplan" [queryParams]="{companyName: companyForm.value.companyName,companyCd:companyForm.value.companyCd}"class="btn btn-default" type = "button" value = "IPO Plan"> 
+		  <a routerLink ="/ipoplan" [queryParams]="{op:'update',companyCd:companyForm.value.companyCd, companyName: companyForm.value.companyName}">IPO Plan</a>
+		  <input routerLink ="/ipoplan" [queryParams]="{op:'update',companyName: companyForm.value.companyName,companyCd:companyForm.value.companyCd}"class="btn btn-default" type = "button" value = "IPO Plan"> 
 		  <a routerLink ="/singlestockchart" [queryParams]="{companyName: companyForm.value.companyName,companyCd:companyForm.value.companyCd}">View Chart</a><input routerLink ="/singlestockchart" [queryParams]="{companyName: companyForm.value.companyName,companyCd:companyForm.value.companyCd}" class="btn btn-default" type = "button" value = "View Chart"> 
     </div>
 	 

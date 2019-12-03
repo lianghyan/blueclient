@@ -133,11 +133,29 @@ export class CompanyupdateComponent implements OnInit {
 	  document.write(y);
   }
 
-  onSubmit(customerData) {
+  onSubmit(data) {
     // Process checkout data here
-    console.warn('Your order has been submitted', customerData);
+    console.warn('Your order has been submitted', data);
 
-    //this.items = this.cartService.clearCart();
-    //this.checkoutForm.reset();
+     const httpOptions = {
+		  headers: new HttpHeaders({
+			'Content-Type':  'application/json;charset=UTF-8',
+ 			'Authorization': 'my-auth-token',
+			'responseType': 'application/json;charset=UTF-8'
+		  }),
+			//params: new HttpParams().append('companyCd', data)
+		};	  
+	   	var url=fsdconfig.fsdcompany+"/update";
+		this.http.post<any>(url, data, httpOptions).subscribe(
+         (val) => {
+			 if(val.status==-1){
+				 alert(val.retMsg);
+			 }else{
+				 alert(val.retMsg);
+				 
+ 			}
+		}
+	);
+
   }
 }

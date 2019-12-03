@@ -35,6 +35,9 @@ export class ExchangeaddComponent implements OnInit {
 		if(op=='update'){
 			this.findExchByCd(exchCd);
 		}
+		if(op=='add'){
+			this.initExchForm();
+		}
 	});
   }
   findExchByCd(exchCd){
@@ -63,6 +66,15 @@ export class ExchangeaddComponent implements OnInit {
 	);
   }
   
+   initExchForm(exchange){
+	  this.exchForm= this.formBuilder.group({
+      exchCd: '',
+	  exchName: '',
+ 	  contactAddr: '',
+	  brief: '',
+	  remarks: '',
+    });		
+  }
   setExchForm(exchange){
 	  this.exchForm= this.formBuilder.group({
       exchCd: exchange.exchCd,

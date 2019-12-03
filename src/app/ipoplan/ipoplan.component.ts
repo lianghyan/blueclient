@@ -11,40 +11,47 @@ import { fsdconfig } from '../config';
 })
 export class IpoplanComponent implements OnInit {
 	ipoForm:FormGroup ;
+	compNameList;
   constructor(private http: HttpClient, private router: Router,   
 			private activatedRoute: ActivatedRoute, private formBuilder:FormBuilder,
 			 private location: Location) {
-	this.ipoForm= this.formBuilder.group({
+
+  }
+
+  ngOnInit() {
+	this.findCompanyNames();
+
+	var companyCd="undefined";
+	var op="undefined";
+  	this.activatedRoute.queryParams.subscribe((param:any )=> {
+		console.log(param.companyCd, 'second');
+		//alert(JSON.stringify(param));		
+		op=param.op;
+		if(op=='update'){
+			companyCd=param.companyCd;
+			this.findIpoPlanByCd(companyCd);
+		}
+		if(op=='add'){
+			this.initIpoPlan('');
+		}
+	});
+	
+  }
+     initIpoPlan(companycd){
+		// alert(companycd);
+		this.ipoForm= this.formBuilder.group({
       id:-1,
-	  companyCd: '',
-	  companyName: '',
+	  companyCd: companycd,
  	  exchCd: '',
 	  exchName: '',
 	  pricePerShare: 0,
 	  totalShares: 0,
 	  openDate: '',
-	  remarks:'0',
+	  remarks:'No remark',
     });
-  }
-
-  ngOnInit() {
-
-	var companyCd="undefined";
-	var companyName="undefined";
-	var op="undefined";
-  	this.activatedRoute.queryParams.subscribe((param:any )=> {
-		console.log(param.companyCd, 'second');
-		//alert(JSON.stringify(param));
-		companyCd=param.companyCd;
-		companyName=param.companyName;
-		op=param.op;
-		if(op=='update'){
-			this.findIpoPlanByCd(companyCd, companyName);
-		}
-	});
-  }
-  
-     findIpoPlanByCd(companyCd, companyName){
+	 }
+	 
+     findIpoPlanByCd(companyCd){
  	   
 	   const httpOptions = {
 		  headers: new HttpHeaders({
@@ -59,11 +66,12 @@ export class IpoplanComponent implements OnInit {
          (val) => {
 			 if(val.status==-1){
 				 alert(val.retMsg);
+				 this.initIpoPlan(companyCd);
 			 }else{
 				// alert(val.dataList);
 				  var ipoPlan=val.data;
 				  if(val.data!=null){
-					this.setIpoPlanForm(ipoPlan, companyName);
+					this.setIpoPlanForm(ipoPlan);
 				  }
 
  			}
@@ -72,12 +80,11 @@ export class IpoplanComponent implements OnInit {
 
    }
    
-   setIpoPlanForm(ipoPlan, companyName){
+   setIpoPlanForm(ipoPlan){
 	  this.ipoForm= this.formBuilder.group({
 		id: ipoPlan.id,
       companyCd: ipoPlan.companyCd,
-	  companyName: companyName,
- 	  exchCd: ipoPlan.exchCd,
+	  exchCd: ipoPlan.exchCd,
 	  exchName: ipoPlan.exchName,
 	  pricePerShare: ipoPlan.pricePerShare,
 	  totalShares: ipoPlan.totalShares,
@@ -105,7 +112,7 @@ export class IpoplanComponent implements OnInit {
 				// alert(val.dataList);
 				  var ipoPlan=val.data;
 				 alert(val.retMsg);
-				 //alert(val.data);
+				 this.setIpoPlanForm(val.data);
 
  			}
 		}
@@ -116,5 +123,29 @@ export class IpoplanComponent implements OnInit {
   goBack(){
 	  this.location.back();
   }
-
+  
+	findCompanyNames(){
+	 	  const httpOptions = {
+		  headers: new HttpHeaders({
+			'Content-Type':  'application/json;charset=UTF-8',
+ 			'Authorization': 'my-auth-token',
+			'responseType': 'application/json;charset=UTF-8'
+		  }),
+			//params: new HttpParams().append('searchStr', data)
+		};	  
+	   	var url=fsdconfig.fsdcompany+"/companycdnames";
+		this.http.post<any>(url, "", httpOptions).subscribe(
+         (val) => {
+			 if(val.status==-1){
+				 alert(val.retMsg);
+			 }else{
+				
+				 if(val.dataList.length>0){
+					 this.compNameList=val.dataList;
+					//alert("return dataList: "+val.dataList);					 
+			    }
+ 			}
+		}
+	);
+   }
 }
