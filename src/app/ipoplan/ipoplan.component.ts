@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,AfterViewInit } from '@angular/core';
 import { FormBuilder,FormGroup } from '@angular/forms';
 import { Router,ActivatedRoute} from '@angular/router'; 
 import { HttpClient, HttpHeaders,HttpParams } from '@angular/common/http';
@@ -9,9 +9,10 @@ import { fsdconfig } from '../config';
   templateUrl: './ipoplan.component.html',
   styleUrls: ['./ipoplan.component.css']
 })
-export class IpoplanComponent implements OnInit {
+export class IpoplanComponent implements OnInit  {
 	ipoForm:FormGroup ;
 	compNameList;
+	exchNameList;
   constructor(private http: HttpClient, private router: Router,   
 			private activatedRoute: ActivatedRoute, private formBuilder:FormBuilder,
 			 private location: Location) {
@@ -20,10 +21,12 @@ export class IpoplanComponent implements OnInit {
 
   ngOnInit() {
 	this.findCompanyNames();
-
+	this.findExchangeNames();
+	this.initIpoPlan('');
+	
 	var companyCd="undefined";
 	var op="undefined";
-  	this.activatedRoute.queryParams.subscribe((param:any )=> {
+	this.activatedRoute.queryParams.subscribe((param:any )=> {
 		console.log(param.companyCd, 'second');
 		//alert(JSON.stringify(param));		
 		op=param.op;
@@ -34,9 +37,11 @@ export class IpoplanComponent implements OnInit {
 		if(op=='add'){
 			this.initIpoPlan('');
 		}
-	});
+	});	
 	
   }
+  
+   
      initIpoPlan(companycd){
 		// alert(companycd);
 		this.ipoForm= this.formBuilder.group({
@@ -44,6 +49,7 @@ export class IpoplanComponent implements OnInit {
 	  companyCd: companycd,
  	  exchCd: '',
 	  exchName: '',
+	  stockCd:'',
 	  pricePerShare: 0,
 	  totalShares: 0,
 	  openDate: '',
@@ -86,12 +92,14 @@ export class IpoplanComponent implements OnInit {
       companyCd: ipoPlan.companyCd,
 	  exchCd: ipoPlan.exchCd,
 	  exchName: ipoPlan.exchName,
+	  stockCd:ipoPlan.stockCd,
 	  pricePerShare: ipoPlan.pricePerShare,
 	  totalShares: ipoPlan.totalShares,
 	  openDate: ipoPlan.openDate,
 	  remarks: ipoPlan.remarks,
     });
-		//alert(this.ipoForm.value.exchCd);
+		
+		
    }
   
   onSubmit(data){
@@ -142,6 +150,31 @@ export class IpoplanComponent implements OnInit {
 				
 				 if(val.dataList.length>0){
 					 this.compNameList=val.dataList;
+					//alert("return dataList: "+val.dataList);					 
+			    }
+ 			}
+		}
+	);
+   }
+   
+   	findExchangeNames(){
+	 	  const httpOptions = {
+		  headers: new HttpHeaders({
+			'Content-Type':  'application/json;charset=UTF-8',
+ 			'Authorization': 'my-auth-token',
+			'responseType': 'application/json;charset=UTF-8'
+		  }),
+			//params: new HttpParams().append('searchStr', data)
+		};	  
+	   	var url=fsdconfig.fsdexch+"/listexchname";
+		this.http.post<any>(url, "", httpOptions).subscribe(
+         (val) => {
+			 if(val.status==-1){
+				 alert(val.retMsg);
+			 }else{
+				
+				 if(val.dataList.length>0){
+					 this.exchNameList=val.dataList;
 					//alert("return dataList: "+val.dataList);					 
 			    }
  			}

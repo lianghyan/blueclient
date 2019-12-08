@@ -15,14 +15,6 @@ export class ExchangeaddComponent implements OnInit {
  constructor(private http: HttpClient, private router: Router,   
 			private activatedRoute: ActivatedRoute, private formBuilder:FormBuilder,
 			private location: Location) {
-				 
-	this.exchForm= this.formBuilder.group({
-      exchCd: '',
-	  exchName: '',
- 	  contactAddr: '',
-	  brief: '',
-	  remarks:'0',
-    });		 
 }
   ngOnInit() {
 	var exchCd="undefined";
@@ -66,7 +58,7 @@ export class ExchangeaddComponent implements OnInit {
 	);
   }
   
-   initExchForm(exchange){
+   initExchForm(){
 	  this.exchForm= this.formBuilder.group({
       exchCd: '',
 	  exchName: '',
