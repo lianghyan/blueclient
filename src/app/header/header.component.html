@@ -14,22 +14,22 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-		<li><a routerLink="/upload">Import Stock Data</a></li>
+		<li><a routerLink="/upload" *ngIf="loginService.role=='admin'">Import Stock Data</a></li>
 		<li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Company <span class="caret"></span></a>
           <ul class="dropdown-menu">            
             <li><a routerLink="/companylist">Find Company</a></li>
-			<li><a routerLink="/companyupdate" [queryParams]="{op:'add'}">Add Company</a></li>
+			<li><a routerLink="/companyupdate" [queryParams]="{op:'add'}" *ngIf="loginService.role=='admin'">Add Company</a></li>
           </ul>
         </li>        
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Exchange <span class="caret"></span></a>
           <ul class="dropdown-menu">            
             <li><a routerLink="/exchangelist">Exchange List</a></li>
-			<li><a routerLink="/exchangeadd" [queryParams]="{op:'add'}">Add Exchange</a></li>
+			<li><a routerLink="/exchangeadd" [queryParams]="{op:'add'}" *ngIf="loginService.role=='admin'">Add Exchange</a></li>
           </ul>
         </li>
-		<li><a routerLink="/ipoplan" [queryParams]="{op:'add'}">Add IPO</a></li>
+		<li><a routerLink="/ipoplan" [queryParams]="{op:'add'}" *ngIf="loginService.role=='admin'">Add IPO</a></li>
 		
 		<li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Chart <span class="caret"></span></a>

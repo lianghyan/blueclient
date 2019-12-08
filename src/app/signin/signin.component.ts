@@ -4,6 +4,7 @@ import { Router,ActivatedRoute} from '@angular/router';
 import { HttpClient, HttpHeaders,HttpParams } from '@angular/common/http';
 
 import { fsdconfig } from '../config';
+import  {LoginService} from '../service/login.service';
 import { bfresponse } from './bfresponse';
 
 @Component({
@@ -15,7 +16,7 @@ export class SigninComponent implements OnInit {
 	loginForm: FormGroup;
 	fsdconfig=fsdconfig;
 	op='signin';
-  constructor(private http: HttpClient, private router: Router, private formBuilder:FormBuilder) { }
+  constructor(private http: HttpClient, private router: Router, private formBuilder:FormBuilder, private loginService: LoginService) { }
 
   ngOnInit() {
 	  this.loginForm = this.formBuilder.group({
@@ -42,7 +43,8 @@ export class SigninComponent implements OnInit {
 			 if(val.status==-1){
 				 alert(val.retMsg);
 			 }else{
-				//alert(val.token);
+				//alert(val.role);
+				this.loginService.role= val.role;
 				window.localStorage.setItem('role', val.role);
 				window.localStorage.setItem('token', val.token);
 				window.localStorage.setItem('userName', this.loginForm.value.userName);

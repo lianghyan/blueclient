@@ -4,6 +4,7 @@ import { Router,ActivatedRoute} from '@angular/router';
 import { HttpClient, HttpHeaders,HttpParams } from '@angular/common/http';
 import { Location } from '@angular/common';
 import { fsdconfig } from '../config';
+
 @Component({
   selector: 'app-ipoplan',
   templateUrl: './ipoplan.component.html',
