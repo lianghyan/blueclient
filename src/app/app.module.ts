@@ -22,6 +22,7 @@ import { MulstockchartComponent } from './chart/mulstockchart/mulstockchart.comp
 import { MulsectorchartComponent } from './chart/mulsectorchart/mulsectorchart.component';
 import { StocksectorchartComponent } from './chart/stocksectorchart/stocksectorchart.component';
 import { UploadComponent } from './upload/upload.component';
+import { BfinterceptorService } from './service/bfinterceptor.service'
 
 @NgModule({
   declarations: [
@@ -67,7 +68,7 @@ import { UploadComponent } from './upload/upload.component';
 	{ path: 'ipoplan', component: IpoplanComponent }
 	])
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: BfinterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
