@@ -48,7 +48,7 @@ export class StocksectorchartComponent implements OnInit {
 			                      .append('toDate', data.toDate)
 			
 		};
-		alert(stockCd);
+		//alert(stockCd);
 	   	var url=fsdconfig.chart+"/stocksectorprice";
 		this.http.post<any>(url, "", httpOptions).subscribe(
          (val) => {

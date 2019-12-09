@@ -1,12 +1,16 @@
   <form class="form-horizontal" [formGroup]="searchForm" role="form" (ngSubmit)="findStockPrice(searchForm.value)">   
   	<div class="form-group">
-     <div class="col-sm-6">
-	 	<select class="custom-select" id="stockCd" formControlName="stockCd" style="width:400px;line-height:40px;height:30px">
+     <div class="row">
+	 <div class="col-md-4 col-md-offset-1">
+	 	<select class="custom-select" id="stockCd" formControlName="stockCd" style="width:360px;line-height:40px;height:30px">
 			<option *ngFor="let company of compNameList; index as productId" value="{{company[0]}}">{{company[0]}}-{{company[1]}}</option>
-		</select> &nbsp;&nbsp;
+		</select>
+		
+	</div>
+	<div class="col-md-6 col-md-offset-1">
 	<button type="submit" class="btn btn-default" >&nbsp;&nbsp;Show Chart&nbsp;&nbsp;</button>
 	<a href="{{downloadURL}}/stock?stockCd={{searchForm.value.stockCd}}"><button type="button" class="btn btn-default" >Export Stock Data</button></a>
-	
+	</div>
     </div>
   </div>
   </form>
