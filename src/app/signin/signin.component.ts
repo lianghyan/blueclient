@@ -15,7 +15,7 @@ import { bfresponse } from './bfresponse';
 export class SigninComponent implements OnInit {
 	loginForm: FormGroup;
 	fsdconfig=fsdconfig;
-	op='signin';
+
   constructor(private http: HttpClient, private router: Router, private formBuilder:FormBuilder, private loginService: LoginService) { }
 
   ngOnInit() {
@@ -30,20 +30,21 @@ export class SigninComponent implements OnInit {
 	  const httpOptions = {
 	  headers: new HttpHeaders({
 		'Content-Type':  'application/json;charset=UTF-8',
-		'Authorization': 'my-auth-token',
-		'responseType': 'application/json'
+		'responseType': 'plain/text'
 	  }),
 		//params: new HttpParams().append('username', userName).append('password', password)
 		//params:new HttpParams({"username": "usky", "password": "111111" });
 	};	  
 	var url=fsdconfig.fsduser+"/login";
-	this.http.post<any>(url, data, httpOptions).subscribe(
+	 
+	this.http.post<any>("http://127.0.0.1:8762/user/login", data, httpOptions).subscribe(
          (val) => {
 			 if(val.status==-1){
 				 alert(val.retMsg);
 			 }else{
 				//alert(val.role);
 				this.loginService.role= val.role;
+				this.loginService.userName= val.userName;
 				window.localStorage.setItem('role', val.role);
 				window.localStorage.setItem('token', val.token);
 				window.localStorage.setItem('userName', data.userName);

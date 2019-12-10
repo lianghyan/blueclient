@@ -18,6 +18,7 @@ export class MulstockchartComponent implements OnInit {
 	searchForm;
 	compNameList;
 	downloadURL=fsdconfig.fsdfile;
+	token;
   constructor(private http: HttpClient, private router: Router,   
 			private activatedRoute: ActivatedRoute, private formBuilder:FormBuilder) {
 		this.searchForm= this.formBuilder.group({
@@ -31,6 +32,8 @@ export class MulstockchartComponent implements OnInit {
 			 }
 	ngOnInit() {
  		//this.initLineOption();
+		this.token=window.localStorage.getItem('token');
+
 		this.findCompanyNames();
 
 	}

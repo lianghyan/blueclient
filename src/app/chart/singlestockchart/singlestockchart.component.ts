@@ -19,6 +19,7 @@ export class SinglestockchartComponent implements OnInit {
 	searchForm;
 	compNameList;
 	downloadURL=fsdconfig.fsdfile;
+	token;
   constructor(private http: HttpClient, private router: Router,   
 			private activatedRoute: ActivatedRoute, private formBuilder:FormBuilder) {
 		this.searchForm= this.formBuilder.group({
@@ -27,6 +28,8 @@ export class SinglestockchartComponent implements OnInit {
 		
 			 }
 	ngOnInit() {
+		this.token=window.localStorage.getItem('token');
+
 		this.priceList=this.priceData.weekList;
 		//alert(this.priceList.dates);
 	  	//alert(this.priceList.values);

@@ -10,8 +10,7 @@ import  {LoginService} from '../service/login.service';
 })
 export class HeaderComponent implements OnInit {
 	userName;	 
-	loginService:LoginService;
-	constructor(private router: Router,private location: Location) { }
+ 	constructor(private router: Router,private location: Location, public loginService:LoginService) { }
 
   ngOnInit() {
 	  this.userName=window.localStorage.getItem('userName');

@@ -19,6 +19,7 @@ export class SinglesectorchartComponent implements OnInit {
 	searchForm;
 	sectorNameList;
 	downloadURL=fsdconfig.fsdfile;
+	token;
   constructor(private http: HttpClient, private router: Router,   
 			private activatedRoute: ActivatedRoute, private formBuilder:FormBuilder) {
 		this.searchForm= this.formBuilder.group({
@@ -29,7 +30,9 @@ export class SinglesectorchartComponent implements OnInit {
 	ngOnInit() {
 		this.findSectorNames()
 	}
-	onChartInit(ec) {     
+	onChartInit(ec) { 
+		this.token=window.localStorage.getItem('token');
+	
          this.echartsIntance = ec;
 	}
 	

@@ -62,9 +62,9 @@
    <div class="btn-group col-sm-offset-2 col-sm-7">
 		<input  class="btn btn-default" type = "submit" value = "Save">
 		  <input routerLink ="/companylist" class="btn btn-default" type = "button" value = "Back">
-		  <a routerLink ="/ipoplan" [queryParams]="{op:'update',companyCd:companyForm.value.companyCd}">IPO Plan</a>
+		  <a style="display:none" routerLink ="/ipoplan" [queryParams]="{op:'update',companyCd:companyForm.value.companyCd}">IPO Plan</a>
 		  <input routerLink ="/ipoplan" [queryParams]="{op:'update',companyCd:companyForm.value.companyCd}"class="btn btn-default" type = "button" value = "IPO Plan"> 
-		  <a routerLink ="/singlestockchart" [queryParams]="{companyName: companyForm.value.companyName,companyCd:companyForm.value.companyCd}">View Chart</a><input routerLink ="/singlestockchart" [queryParams]="{companyName: companyForm.value.companyName,companyCd:companyForm.value.companyCd}" class="btn btn-default" type = "button" value = "View Chart"> 
+		  <a style="display:none" routerLink ="/singlestockchart" [queryParams]="{companyName: companyForm.value.companyName,companyCd:companyForm.value.companyCd}">View Chart</a><input routerLink ="/singlestockchart" [queryParams]="{companyName: companyForm.value.companyName,companyCd:companyForm.value.companyCd}" class="btn btn-default" type = "button" value = "View Chart"> 
     </div>
 	 
  </form>
