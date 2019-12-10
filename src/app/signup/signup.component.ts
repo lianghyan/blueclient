@@ -37,7 +37,7 @@ export class SignupComponent implements OnInit {
 			//params:new HttpParams({"username": "usky", "password": "111111" });
 		};	  
 	  
-	  var url=fsdconfig.serverurl+fsdconfig.fsduser+"/create";
+	  var url=fsdconfig.fsduser+"/create";
 	  this.http.post<any>(url, data, httpOptions).subscribe(
          (val) => {
 			 alert(val.retMsg);
@@ -46,7 +46,21 @@ export class SignupComponent implements OnInit {
   }
   
   sendMail(){
-  	  alert(fsdconfig.serverurl+fsdconfig.fsdsecurity+"/create");
-
+	  	  var httpOptions = {
+		  headers: new HttpHeaders({
+			'Content-Type':  'application/json;charset=UTF-8',
+			'Authorization': 'my-auth-token',
+			'responseType': 'application/json;charset=UTF-8'
+		  })
+			//params: new HttpParams().append('username', 'utree').append('password', '111111')
+			//params:new HttpParams({"username": "usky", "password": "111111" });
+		};	  
+	  
+	  var url=fsdconfig.fsduser+"/mail";
+	  this.http.post<any>(url, this.userForm.value, httpOptions).subscribe(
+         (val) => {
+			 alert(val.retMsg);
+		}
+		);
   }
 }
