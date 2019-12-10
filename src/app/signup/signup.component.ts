@@ -26,11 +26,10 @@ export class SignupComponent implements OnInit {
         });
   }
 
-  save(){
+  onClickSubmit(data){
 	  var httpOptions = {
 		  headers: new HttpHeaders({
 			'Content-Type':  'application/json;charset=UTF-8',
-			// "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
 			'Authorization': 'my-auth-token',
 			'responseType': 'application/json;charset=UTF-8'
 		  })
@@ -38,10 +37,8 @@ export class SignupComponent implements OnInit {
 			//params:new HttpParams({"username": "usky", "password": "111111" });
 		};	  
 	  
-	 // alert("save"+ this.userForm.value.role);
-	  
 	  var url=fsdconfig.serverurl+fsdconfig.fsduser+"/create";
-	  this.http.post<any>(url, this.userForm.value, httpOptions).subscribe(
+	  this.http.post<any>(url, data, httpOptions).subscribe(
          (val) => {
 			 alert(val.retMsg);
 		}

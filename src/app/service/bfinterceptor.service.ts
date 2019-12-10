@@ -16,7 +16,7 @@ export class BfinterceptorService implements HttpInterceptor {
   
   intercept(request: HttpRequest<any>, next: HttpHandler){
 	  var token=window.localStorage.getItem('token');
-	  alert(token);
+	  //alert(token);
 	  if(token!=null && token!='undefined'){
 		const clonedRequest = request.clone({
 			headers: request.headers.set("fsdtoken", token)

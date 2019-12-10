@@ -30,15 +30,14 @@ export class SigninComponent implements OnInit {
 	  const httpOptions = {
 	  headers: new HttpHeaders({
 		'Content-Type':  'application/json;charset=UTF-8',
-		// "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
 		'Authorization': 'my-auth-token',
-		'responseType': 'text'
+		'responseType': 'application/json'
 	  }),
 		//params: new HttpParams().append('username', userName).append('password', password)
 		//params:new HttpParams({"username": "usky", "password": "111111" });
 	};	  
 	var url=fsdconfig.fsduser+"/login";
-	this.http.post<any>(url, this.loginForm.value, httpOptions).subscribe(
+	this.http.post<any>(url, data, httpOptions).subscribe(
          (val) => {
 			 if(val.status==-1){
 				 alert(val.retMsg);
@@ -47,7 +46,7 @@ export class SigninComponent implements OnInit {
 				this.loginService.role= val.role;
 				window.localStorage.setItem('role', val.role);
 				window.localStorage.setItem('token', val.token);
-				window.localStorage.setItem('userName', this.loginForm.value.userName);
+				window.localStorage.setItem('userName', data.userName);
 				//alert(val.retMsg);
 				this.router.navigateByUrl("companylist");  
 			}
